@@ -1,0 +1,9 @@
+main: de.todesser.BetterWorlds.main.Main
+
+name: BetterWorlds
+version: 1.0.0
+commands:
+  world:
+    aliases: w
+    usage: /world <create/delete/teleport> <name>
+    description: Main command for a series of commands to manipulate and create extra worlds.
