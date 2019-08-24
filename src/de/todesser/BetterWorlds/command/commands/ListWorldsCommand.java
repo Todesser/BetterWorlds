@@ -19,13 +19,15 @@ public class ListWorldsCommand implements ICommand {
     public void execute(CommandSender sender, Command command, String[] args) {
 
         if(args != null) {
+            sender.sendMessage("You used too many arguments!");
             return;
         }
 
         StringBuilder string = new StringBuilder("Better Worlds: ");
         for(String s : Config.get("worlds")) {
-            string.append(s.substring(World.PREFIX.length()));
+            string.append(s.substring(World.PREFIX.length())).append(", ");
         }
+        string.replace(string.length()-2,string.length()-1, "");
         sender.sendMessage(string.toString());
 
     }

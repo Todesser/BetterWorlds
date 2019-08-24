@@ -25,10 +25,18 @@ public class CreateCommand implements ICommand {
     public void execute(CommandSender sender, Command command, String[] args) {
 
         if(args == null) {
+            sender.sendMessage("You used too few arguments!");
+            return;
+        }
+
+        if(args.length != 1) {
+            sender.sendMessage("You used too many arguments!");
             return;
         }
 
         String name = World.PREFIX + args[0];
+
+        sender.sendMessage("Creating " + args[0] + "...");
 
         if(!World.create(name, WorldType.EMPTY)) {
             sender.sendMessage("World already exists!");
@@ -36,6 +44,8 @@ public class CreateCommand implements ICommand {
         }
 
         Config.set("worlds", name);
+
+        sender.sendMessage(args[0] + " has been created!");
 
         if(sender instanceof Player) {
             Player player = (Player) sender;

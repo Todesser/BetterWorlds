@@ -1,7 +1,7 @@
 main: de.todesser.BetterWorlds.main.Main
 
 name: BetterWorlds
-version: 1.0.0
+version: 1.0.1
 commands:
   world:
     aliases: w

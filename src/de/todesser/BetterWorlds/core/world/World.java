@@ -11,6 +11,7 @@ import java.io.IOException;
 public class World {
 
     public static final String PREFIX = "bw_";
+    public static final String STD_PREFIX = "std_";
 
     public World getWorld() {
         return this;

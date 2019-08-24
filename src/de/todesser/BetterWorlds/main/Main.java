@@ -1,10 +1,8 @@
 package de.todesser.BetterWorlds.main;
 
 import de.todesser.BetterWorlds.command.Command;
-import de.todesser.BetterWorlds.command.commands.CreateCommand;
-import de.todesser.BetterWorlds.command.commands.DeleteCommand;
-import de.todesser.BetterWorlds.command.commands.ListWorldsCommand;
-import de.todesser.BetterWorlds.command.commands.TeleportCommand;
+import de.todesser.BetterWorlds.command.commands.*;
+import de.todesser.BetterWorlds.core.world.World;
 import de.todesser.BetterWorlds.io.Config;
 import de.todesser.BetterWorlds.io.Message;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -33,12 +31,25 @@ public class Main extends JavaPlugin {
                 list.remove(s);
             }
         }
+        File[] files = Main.getPlugin().getServer().getWorldContainer().listFiles();
+        if(files != null) {
+            for(File f : files) {
+                if(f.isDirectory()) {
+                    if(f.getName().startsWith(World.PREFIX)) {
+                        if(!list.contains(f.getName())) {
+                            list.add(f.getName());
+                        }
+                    }
+                }
+            }
+        }
         getConfig().set("worlds", list);
         saveConfig();
 
         Command.registerCommand(new DeleteCommand());
         Command.registerCommand(new CreateCommand());
         Command.registerCommand(new TeleportCommand());
+        Command.registerCommand(new UnloadCommand());
         Command.registerCommand(new ListWorldsCommand());
         Command.enableMainCommand("world");
 
