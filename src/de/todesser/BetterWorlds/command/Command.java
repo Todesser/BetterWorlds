@@ -1,6 +1,7 @@
 package de.todesser.BetterWorlds.command;
 
 import de.todesser.BetterWorlds.main.Main;
+import de.todesser.BetterWorlds.resource_bundle.LanguageLoader;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
@@ -27,7 +28,7 @@ public class Command implements CommandExecutor {
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
 
         if(!sender.hasPermission("BetterWorlds.permission")) {
-            sender.sendMessage("You are not allowed to use this command!");
+            sender.sendMessage(LanguageLoader.get("plugin_identifier", "not_allowed_to_use_command"));
             return true;
         }
 

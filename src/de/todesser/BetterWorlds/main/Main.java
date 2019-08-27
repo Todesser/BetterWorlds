@@ -5,6 +5,7 @@ import de.todesser.BetterWorlds.command.commands.*;
 import de.todesser.BetterWorlds.core.world.World;
 import de.todesser.BetterWorlds.io.Config;
 import de.todesser.BetterWorlds.io.Message;
+import de.todesser.BetterWorlds.resource_bundle.LanguageLoader;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -53,12 +54,12 @@ public class Main extends JavaPlugin {
         Command.registerCommand(new ListWorldsCommand());
         Command.enableMainCommand("world");
 
-        Message.toConsole("Started!");
+        Message.toConsole(LanguageLoader.get("console_plugin_identifier", "loaded_plugin"));
     }
 
     @Override
     public void onDisable() {
         //Bukkit.getWorlds().forEach(World::save);
-        Message.toConsole("Stopped!");
+        Message.toConsole(LanguageLoader.get("console_plugin_identifier", "unloaded_plugin"));
     }
 }

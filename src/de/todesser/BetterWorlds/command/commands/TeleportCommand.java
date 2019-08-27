@@ -3,6 +3,7 @@ package de.todesser.BetterWorlds.command.commands;
 import de.todesser.BetterWorlds.command.ICommand;
 import de.todesser.BetterWorlds.core.Teleport;
 import de.todesser.BetterWorlds.core.world.World;
+import de.todesser.BetterWorlds.resource_bundle.LanguageLoader;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -21,19 +22,19 @@ public class TeleportCommand implements ICommand {
     public void execute(CommandSender sender, Command command, String[] args) {
 
         if(args == null) {
-            sender.sendMessage("You used too few arguments!");
+            sender.sendMessage(LanguageLoader.get("plugin_identifier", "too_few_arguments_for_command"));
             return;
         }
 
         if(args.length > 2) {
-            sender.sendMessage("You used to many arguments!");
+            sender.sendMessage(LanguageLoader.get("plugin_identifier", "too_many_arguments_for_command"));
             return;
         }
 
         if(args.length == 1) {
 
             if(!(sender instanceof Player)) {
-                sender.sendMessage("To perform the teleport command you must be a player!");
+                sender.sendMessage(LanguageLoader.get("plugin_identifier", "must_be_player", "teleport"));
                 return;
             }
 
@@ -50,16 +51,16 @@ public class TeleportCommand implements ICommand {
             }
 
             if(player.getWorld().getName().equals(world)) {
-                player.sendMessage("You are already in " + worldName + "!");
+                player.sendMessage(LanguageLoader.get("plugin_identifier", "you_already_located_in_world", worldName));
                 return;
             }
 
-            player.sendMessage("Teleporting...");
+            player.sendMessage(LanguageLoader.get("plugin_identifier", "teleporting_to_world", worldName));
             if(!Teleport.teleport(player, world)) {
-                player.sendMessage(worldName + " does not exist!");
+                player.sendMessage(LanguageLoader.get("plugin_identifier", "world_not_existing", worldName));
                 return;
             }
-            player.sendMessage("You have been teleported to " + worldName + "!");
+            player.sendMessage(LanguageLoader.get("plugin_identifier", "teleported_to_world", worldName));
 
             return;
         }
@@ -69,7 +70,7 @@ public class TeleportCommand implements ICommand {
             Player player = Bukkit.getPlayerExact(args[0]);
 
             if(player == null) {
-                sender.sendMessage(args[0] + " is currently offline!");
+                sender.sendMessage(LanguageLoader.get("plugin_identifier", "player_is_offline", args[0]));
                 return;
             }
 
@@ -84,21 +85,20 @@ public class TeleportCommand implements ICommand {
             }
 
             if(player.getWorld().getName().equals(world)) {
-                sender.sendMessage(args[0] + " is already in " + worldName + "!");
+                sender.sendMessage(LanguageLoader.get("plugin_identifier", "player_already_located_in_world", args[0], worldName));
                 return;
             }
 
-            sender.sendMessage("Teleporting...");
+            sender.sendMessage(LanguageLoader.get("plugin_identifier", "teleporting_to_world", worldName));
             if(!Teleport.teleport(player, world)) {
-                sender.sendMessage(worldName + " does not exist!");
+                sender.sendMessage(LanguageLoader.get("plugin_identifier", "world_not_existing", worldName));
                 return;
             }
-            player.sendMessage("You have been teleported to " + worldName + "!");
+            player.sendMessage(LanguageLoader.get("plugin_identifier", "teleported_to_world", worldName));
             if(!player.getName().equals(sender.getName())) {
-                sender.sendMessage(args[0] + " has been teleported to " + worldName + "!");
+                sender.sendMessage(LanguageLoader.get("plugin_identifier", "player_teleported_to_world", args[0], worldName));
             }
 
-            return;
         }
 
     }

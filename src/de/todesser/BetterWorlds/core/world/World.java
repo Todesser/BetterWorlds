@@ -50,10 +50,16 @@ public class World {
     public static boolean delete(String name) {
         Bukkit.unloadWorld(name, false);
 
-        try {
-            FileUtils.deleteDirectory(new File(Main.getPlugin().getServer().getWorldContainer().getPath() + "\\" + name));
-        } catch (IOException e) {
+        File f = new File(Main.getPlugin().getServer().getWorldContainer().getPath() + "\\" + name);
+
+        if(!f.exists()) {
             return false;
+        }
+
+        try {
+            FileUtils.deleteDirectory(f);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return true;
